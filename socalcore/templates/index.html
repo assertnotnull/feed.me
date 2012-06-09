@@ -18,6 +18,7 @@
                 lng: longitude,
                 height: '100px'
             });
+			optionChange(document.getElementById('boroughs'));
         });
 		
 		function geoLocation(){
@@ -60,7 +61,7 @@
 	</div>
 	<div id="right">
 		<div id="fields">
-			<input type="text" value="enter a category">
+			<input id='search' type="text" placeholder="Enter a category"><input type="button" onclick='search()'  value='search'/>
 			<select id="boroughs" data-placeholder="Choose a borough..."  onchange="optionChange(this)">
 				<option>Ahuntsic-Cartierville</option>
 				<option>Anjou</option>
