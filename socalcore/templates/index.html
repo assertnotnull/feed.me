@@ -26,7 +26,7 @@
                 success: function(position) {
 					latitude = position.coords.latitude;
 					longitude = position.coords.longitude;
-                    map.setCenter(latitude, longitude);
+					map.setCenter(latitude, longitude);
                 },
                 error: function(error) {
                     alert('Geolocation failed: '+error.message);
@@ -41,6 +41,12 @@
 			var text = sel.options[sel.selectedIndex].text;
 			if(text === "My Location") {
 				geoLocation();
+			}
+			else {
+				var loc = sel.options[sel.selectedIndex].value.split(',');
+				latitude = loc[0];
+				longitude = loc[1];
+				map.setCenter(latitude, longitude);
 			}
 		}
     </script>
@@ -61,28 +67,29 @@
 	</div>
 	<div id="right">
 		<div id="fields">
-			<input id='search' type="text" placeholder="Enter a category"><input type="button" onclick='search()'  value='search'/>
+			<input id='search' type="text" placeholder="Enter a category">
+			<input style="width: 100px" type="button" onclick='search()'  value='search'/>
 			<select id="boroughs" data-placeholder="Choose a borough..."  onchange="optionChange(this)">
-				<option>Ahuntsic-Cartierville</option>
-				<option>Anjou</option>
-				<option>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
-				<option>Lachine</option>
-				<option>LaSalle</option>
-				<option>Le Plateau-Mont-Royal</option>
-				<option>Le Sud-Ouest </option>
-				<option>L’Île-Bizard–Sainte-Geneviève</option>
-				<option>Mercier–Hochelaga-Maisonneuve</option>
-				<option>Montréal-Nord</option>
-				<option>Outremont</option>
-				<option>Pierrefonds-Roxboro</option>
-				<option>Rivière-des-Prairies–Pointe-aux-Trembles</option>
-				<option>Rosemont–La Petite-Patrie</option>
-				<option>Saint-Laurent</option>
-				<option>Saint-Léonard</option>
-				<option>Verdun</option>
-				<option>Ville-Marie</option>
-				<option>Villeray–Saint-Michel–Parc-Extension</option>
-				<option>My Location<option>
+				<option value='45.541225,-73.704929'>Ahuntsic-Cartierville</option>
+				<option value='45.609114,-73.558474'>Anjou</option>
+				<option value='45.496,-73.633862'>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
+				<option value="45.448691,-73.684788">Lachine</option>
+				<option value="45.431226,-73.631058">LaSalle</option>
+				<option value="45.523007,-73.57501">Le Plateau-Mont-Royal</option>
+				<option value="45.457723,-73.592091">Le Sud-Ouest </option>
+				<option value="45.497444,-73.890781">L’Île-Bizard–Sainte-Geneviève</option>
+				<option value="45.570073,-73.526001">Mercier–Hochelaga-Maisonneuve</option>
+				<option value="45.600587,-73.629513">Montréal-Nord</option>
+				<option value="45.514377,-73.605609">Outremont</option>
+				<option value="45.472651,-73.871727">Pierrefonds-Roxboro</option>
+				<option value="45.662167,-73.520336">Rivière-des-Prairies–Pointe-aux-Trembles</option>
+				<option value="45.536776,-73.61372">Rosemont–La Petite-Patrie</option>
+				<option value="45.522225,-73.66642">Saint-Laurent</option>
+				<option value="45.588516,-73.591146">Saint-Léonard</option>
+				<option value="45.451461,-73.566599">Verdun</option>
+				<option value="45.510678,-73.562565">Ville-Marie</option>
+				<option value="45.551564,-73.613033">Villeray–Saint-Michel–Parc-Extension</option>
+				<option>My Location</option>
 			</select>
 		</div>
 		
