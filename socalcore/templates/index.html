@@ -18,8 +18,10 @@
                 lng: longitude,
                 height: '100px'
             });
-
-            GMaps.geolocate({
+        });
+		
+		function geoLocation(){
+			GMaps.geolocate({
                 success: function(position) {
 					latitude = position.coords.latitude;
 					longitude = position.coords.longitude;
@@ -32,7 +34,14 @@
                     alert("Your browser does not support geolocation");
                 }
             });
-        });
+		}
+		
+		function optionChange(sel) {
+			var text = sel.options[sel.selectedIndex].text;
+			if(text === "My Location") {
+				geoLocation();
+			}
+		}
     </script>
     <link rel="stylesheet" type="text/css" href="static/base.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,7 +61,28 @@
 	<div id="right">
 		<div id="fields">
 			<input type="text" value="enter a category">
-			<input type="text" value="select a borough">
+			<select id="boroughs" data-placeholder="Choose a borough..."  onchange="optionChange(this)">
+				<option>Ahuntsic-Cartierville</option>
+				<option>Anjou</option>
+				<option>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
+				<option>Lachine</option>
+				<option>LaSalle</option>
+				<option>Le Plateau-Mont-Royal</option>
+				<option>Le Sud-Ouest </option>
+				<option>L’Île-Bizard–Sainte-Geneviève</option>
+				<option>Mercier–Hochelaga-Maisonneuve</option>
+				<option>Montréal-Nord</option>
+				<option>Outremont</option>
+				<option>Pierrefonds-Roxboro</option>
+				<option>Rivière-des-Prairies–Pointe-aux-Trembles</option>
+				<option>Rosemont–La Petite-Patrie</option>
+				<option>Saint-Laurent</option>
+				<option>Saint-Léonard</option>
+				<option>Verdun</option>
+				<option>Ville-Marie</option>
+				<option>Villeray–Saint-Michel–Parc-Extension</option>
+				<option>My Location<option>
+			</select>
 		</div>
 		
 		<div id="map"> MAP!!
