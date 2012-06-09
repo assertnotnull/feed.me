@@ -5,5 +5,5 @@ from search import Search
 def index(request):
     return render(request, 'index.html')
 
-def search(request, category):
-    return HttpResponse(Search.search(category, '-73.61995,45.49981'))
+def search(request, category, location):
+    return HttpResponse(Search.search(category, location))

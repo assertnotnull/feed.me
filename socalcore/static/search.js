@@ -1,0 +1,1 @@
+function search() {	var cat = $('#search').val();	jQuery.get('/search/' + cat + "/" + longitude + "," + latitude, showResults);}function showResults(data) {	$('#list').html(data);}

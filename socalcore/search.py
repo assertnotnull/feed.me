@@ -13,4 +13,10 @@ class Search:
 
 		listings = json.loads(data)['listings']
 		
-		return json.dumps(listings)
+		ret = "<ul>"
+		for business in listings:
+			ret += "<li>" + business['name'] + "</li>"
+			
+		ret += "</ul>"
+		
+		return ret

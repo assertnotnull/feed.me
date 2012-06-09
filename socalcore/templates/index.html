@@ -5,28 +5,31 @@
     <script type="text/javascript" src="static/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="static/gmap.js"></script>
+	<script type="text/javascript" src="static/search.js"></script>
     <script type="text/javascript">
         var map;
+		var latitude = 45.49981;
+		var longitude = -73.6199;
+		
         $(document).ready(function(){
             map = new GMaps({
                 div: '#map',
-                lat: -12.043333,
-                lng: -77.028333,
+                lat: latitude,
+                lng: longitude,
                 height: '100px'
             });
 
             GMaps.geolocate({
                 success: function(position) {
-                    map.setCenter(position.coords.latitude, position.coords.longitude);
+					latitude = position.coords.latitude;
+					longitude = position.coords.longitude;
+                    map.setCenter(latitude, longitude);
                 },
                 error: function(error) {
                     alert('Geolocation failed: '+error.message);
                 },
                 not_supported: function() {
                     alert("Your browser does not support geolocation");
-                },
-                always: function() {
-                    alert("Done!");
                 }
             });
         });
@@ -36,6 +39,8 @@
 </head>
 <body>
     Welcome to feed.me!
+	<input id="search" type="text" /> <input type="button"  onclick="search()" value="search"/>
     <div id="map">Javascript do not work on your browser!</div>
+	<div id="list" ></div>
 </body>
 </html>
