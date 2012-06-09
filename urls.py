@@ -7,6 +7,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
     url(r'^$', 'socalcore.views.index', name='index'),
     url(r'^search/(?P<category>.*)/(?P<location>.*)', 'socalcore.views.search', name='search'),
+    url(r'^searchwajam/(?P<place>)\w+$/', 'socalcore.views.search', name='search_wajam'),
     # Examples:
     # url(r'^$', 'socal.views.home', name='home'),
     # url(r'^socal/', include('socal.foo.urls')),
