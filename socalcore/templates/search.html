@@ -3,22 +3,46 @@
 {#    {{ yellow|default:"not found" }}#}
     {% for business in yellow %}
     <li>{{ business.name }}</li>
-        <script type="text/javascript">
-            map.addMarker(
-                    {lat : "{{ business.geoCode.latitude }}",
-                        lng: "{{ business.geoCode.longitude }}",
-                        title: "{{ business.name }}",
-                        infoWindow: {
-                            content : '<p>' +
-                                    '<h3>{{ business.name }}</h3>' +
-                                    {% for k,v in business.address.iteritems %}
-                                       ' {{ k }} : {{ v }} <br/>' +
-                                    {% endfor %}
-                                    '</p>'
-                                    }
-                    });
-        </script>
     {% endfor %}
+
+    <script type="text/javascript">
+        $('#map').gmap3(
+                {action: 'addMarkers',
+                markers: [
+        {% for business in yellow %}
+            { lat : {{ business.geoCode.latitude }},
+              lng : {{ business.geoCode.longitude }},
+              data: '<h3>{{ business.name }}</h3><p>' +
+                      {% for k,v in business.address.iteritems %}
+                          ' {{ k }} : {{ v }} <br/>' +
+                      {% endfor %}
+                      '</p>'},
+        {% endfor %}
+                ],
+                    marker: {
+                        options: {
+                            draggable: false
+                        }
+                    },
+                    events:{
+                        mouseover: function(marker, event, data){
+                            var map = $(this).gmap3('get'),
+                                    infowindow = $(this).gmap3({action:'get', name:'infowindow'});
+                            if (infowindow){
+                                infowindow.open(map, marker);
+                                infowindow.setContent(data);
+                            } else {
+                                $(this).gmap3({action:'addinfowindow', anchor:marker, options:{content: data}});
+                            }
+                        },
+                        mouseout: function(){
+                            var infowindow = $(this).gmap3({action:'get', name:'infowindow'});
+                            if (infowindow){
+                                infowindow.close();
+                            }
+                        }
+                }},"autofit")
+    </script>
 </ul>
 <h1>What your friends said</h1>
 <ul>

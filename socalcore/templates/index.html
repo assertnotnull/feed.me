@@ -4,51 +4,28 @@
 <head>
     <script type="text/javascript" src="static/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <script type="text/javascript" src="static/gmap.js"></script>
+    <script type="text/javascript" src="static/jquery-gmap3-4.1/gmap3.min.js"></script>
 	<script type="text/javascript" src="static/search.js"></script>
     <script type="text/javascript">
         var map;
-		var latitude = 45.49981;
-		var longitude = -73.6199;
+		var latitude = 45.523668;
+		var longitude = -73.655777;
 		
         $(document).ready(function(){
-            map = new GMaps({
-                div: '#map',
-                lat: latitude,
-                lng: longitude,
-                height: '100px'
-            });
-			optionChange(document.getElementById('boroughs'));
+            $('#map').gmap3(
+                    {action: 'init',
+                        options: {
+                            center: [latitude, longitude],
+                            zoom: 10,
+                            mapTypeControl: true,
+                            navigationControl: true,
+                            scrollwheel: true,
+                            streetViewControl: true
+                        }
+                    }
+            )
         });
 		
-		function geoLocation(){
-			GMaps.geolocate({
-                success: function(position) {
-					latitude = position.coords.latitude;
-					longitude = position.coords.longitude;
-					map.setCenter(latitude, longitude);
-                },
-                error: function(error) {
-                    alert('Geolocation failed: '+error.message);
-                },
-                not_supported: function() {
-                    alert("Your browser does not support geolocation");
-                }
-            });
-		}
-		
-		function optionChange(sel) {
-			var text = sel.options[sel.selectedIndex].text;
-			if(text === "My Location") {
-				geoLocation();
-			}
-			else {
-				var loc = sel.options[sel.selectedIndex].value.split(',');
-				latitude = loc[0];
-				longitude = loc[1];
-				map.setCenter(latitude, longitude);
-			}
-		}
     </script>
     <link rel="stylesheet" type="text/css" href="static/base.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -62,35 +39,36 @@
 		
 		<div id="results">
 
-		
+            <h1>Search for a restaurant whose name contain the search term</h1>
+            <p>ex: frites</p>
 		</div>
 	</div>
 	<div id="right">
 		<div id="fields">
 			<input id='search' type="text" placeholder="Enter a category">
-			<input style="width: 100px" type="button" onclick='search()'  value='search'/>
-			<select id="boroughs" data-placeholder="Choose a borough..."  onchange="optionChange(this)">
-				<option value='45.541225,-73.704929'>Ahuntsic-Cartierville</option>
-				<option value='45.609114,-73.558474'>Anjou</option>
-				<option value='45.496,-73.633862'>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
-				<option value="45.448691,-73.684788">Lachine</option>
-				<option value="45.431226,-73.631058">LaSalle</option>
-				<option value="45.523007,-73.57501">Le Plateau-Mont-Royal</option>
-				<option value="45.457723,-73.592091">Le Sud-Ouest </option>
-				<option value="45.497444,-73.890781">L’Île-Bizard–Sainte-Geneviève</option>
-				<option value="45.570073,-73.526001">Mercier–Hochelaga-Maisonneuve</option>
-				<option value="45.600587,-73.629513">Montréal-Nord</option>
-				<option value="45.514377,-73.605609">Outremont</option>
-				<option value="45.472651,-73.871727">Pierrefonds-Roxboro</option>
-				<option value="45.662167,-73.520336">Rivière-des-Prairies–Pointe-aux-Trembles</option>
-				<option value="45.536776,-73.61372">Rosemont–La Petite-Patrie</option>
-				<option value="45.522225,-73.66642">Saint-Laurent</option>
-				<option value="45.588516,-73.591146">Saint-Léonard</option>
-				<option value="45.451461,-73.566599">Verdun</option>
-				<option value="45.510678,-73.562565">Ville-Marie</option>
-				<option value="45.551564,-73.613033">Villeray–Saint-Michel–Parc-Extension</option>
-				<option>My Location</option>
-			</select>
+            <select id="boroughs" data-placeholder="Choose a borough..."  onchange="search()">
+                <option value='45.541225,-73.704929'>Ahuntsic-Cartierville</option>
+                <option value='45.609114,-73.558474'>Anjou</option>
+                <option value='45.496,-73.633862'>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
+                <option value="45.448691,-73.684788">Lachine</option>
+                <option value="45.431226,-73.631058">LaSalle</option>
+                <option value="45.523007,-73.57501">Le Plateau-Mont-Royal</option>
+                <option value="45.457723,-73.592091">Le Sud-Ouest </option>
+                <option value="45.497444,-73.890781">L’Île-Bizard–Sainte-Geneviève</option>
+                <option value="45.570073,-73.526001">Mercier–Hochelaga-Maisonneuve</option>
+                <option value="45.600587,-73.629513">Montréal-Nord</option>
+                <option value="45.514377,-73.605609">Outremont</option>
+                <option value="45.472651,-73.871727">Pierrefonds-Roxboro</option>
+                <option value="45.662167,-73.520336">Rivière-des-Prairies–Pointe-aux-Trembles</option>
+                <option value="45.536776,-73.61372">Rosemont–La Petite-Patrie</option>
+                <option value="45.522225,-73.66642">Saint-Laurent</option>
+                <option value="45.588516,-73.591146">Saint-Léonard</option>
+                <option value="45.451461,-73.566599">Verdun</option>
+                <option value="45.510678,-73.562565">Ville-Marie</option>
+                <option value="45.551564,-73.613033">Villeray–Saint-Michel–Parc-Extension</option>
+                <option>My Location</option>
+            </select>
+            <input style="width: 100px" type="button" onclick='search()'  value='search'/>
 		</div>
 		
 		<div id="map"> MAP!!
