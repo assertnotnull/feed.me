@@ -1,16 +1,24 @@
-Emplacement: {{ place }}<br/>
-{% if total_found %}
-    Total : {{ total_found }}<br/>
-{% else %}
-    No result found
-{% endif %}
-
-
-<h1>Restaurant name</h1>
+<h1>Restaurants</h1>
 <ul>
-    <li>In vitae dui at dui sodales condimentum</li>
-    <li>Integer imperdiet mauris nec risus aliquet vitae bibendum massa commodo.</li>
-    <li>Aenean eget neque eu tellus semper ornare</li>
+{#    {{ yellow|default:"not found" }}#}
+    {% for business in yellow %}
+    <li>{{ business.name }}</li>
+        <script type="text/javascript">
+            map.addMarker(
+                    {lat : "{{ business.geoCode.latitude }}",
+                        lng: "{{ business.geoCode.longitude }}",
+                        title: "{{ business.name }}",
+                        infoWindow: {
+                            content : '<p>' +
+                                    '<h3>{{ business.name }}</h3>' +
+                                    {% for k,v in business.address.iteritems %}
+                                       ' {{ k }} : {{ v }} <br/>' +
+                                    {% endfor %}
+                                    '</p>'
+                                    }
+                    });
+        </script>
+    {% endfor %}
 </ul>
 <h1>What your friends said</h1>
 <ul>
