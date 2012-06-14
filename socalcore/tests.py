@@ -21,6 +21,6 @@ class SimpleTest(TestCase):
 
     def test_wajam_api(self):
         wajamurl = 'https://api.wajam.com/trial/v1/search?q={0}'
-        result = wajam_search(wajamurl, self.location)
+        result = wajam_search(wajamurl, 'suchi')
         print result
-        self.assertEqual(result.get('count'), 0)
+        self.assertEqual(result.get('total_found'), 0)
