@@ -3,7 +3,7 @@
 <ul>
 {#    {{ yellow|default:"not found" }}#}
     {% for business in yellow %}
-    <li id="{{ business.name }}"><a href="#">{{ business.name }}</a></li>
+    <li id="{{ business.address.pcode }}"><a href="#">{{ business.name }}</a></li>
         <div>{% for k,v in business.address.iteritems %}
             {{ k }} : {{ v }} <br/>
         {% endfor %}</div>
@@ -16,7 +16,7 @@
         {% for business in yellow %}
             { lat : {{ business.geoCode.latitude }},
               lng : {{ business.geoCode.longitude }},
-              data: '{{ business.name }}'},
+              data: '{{ business.address.pcode }}'},
         {% endfor %}
                 ],
                     marker: {
@@ -25,16 +25,16 @@
                         },
                         events:{
                             click: function(marker, event, data){
-                                //$('#accordion').accordion('option', 'active', "'#"+ data+"'"); if data = pcode
+                                $('#accordion').accordion('option', 'active', "'#"+ data +"'");
 
-                                var map = $(this).gmap3('get'),
-                                        infowindow = $(this).gmap3({action:'get', name:'infowindow'});
-                                if (infowindow){
-                                    infowindow.open(map, marker);
-                                    infowindow.setContent(data);
-                                } else {
-                                    $(this).gmap3({action:'addinfowindow', anchor:marker, options:{content: data}});
-                                }
+//                                var map = $(this).gmap3('get'),
+//                                        infowindow = $(this).gmap3({action:'get', name:'infowindow'});
+//                                if (infowindow){
+//                                    infowindow.open(map, marker);
+//                                    infowindow.setContent(data);
+//                                } else {
+//                                    $(this).gmap3({action:'addinfowindow', anchor:marker, options:{content: data}});
+//                                }
                             }
                         }
                 }},'autofit');
