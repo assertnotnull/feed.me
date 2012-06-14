@@ -6,6 +6,7 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="static/jquery-gmap3-4.1/gmap3.min.js"></script>
 	<script type="text/javascript" src="static/search.js"></script>
+	<script type="text/javascript" src="static/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
     <link rel="stylesheet" type="text/css" href="static/base.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>FEED.ME - the *ultimate* restaurant finder</title>
@@ -25,7 +26,7 @@
 	<div id="right">
 		<div id="fields">
 			<input id='search' type="text" placeholder="Enter a category">
-            <select id="boroughs" data-placeholder="Choose a borough..."  onchange="search()">
+            <select id="boroughs" data-placeholder="Choose a borough...">
                 <option value='45.541225,-73.704929'>Ahuntsic-Cartierville</option>
                 <option value='45.609114,-73.558474'>Anjou</option>
                 <option value='45.496,-73.633862'>Côte-des-Neiges–Notre-Dame-de-Grâce</option>
@@ -47,7 +48,7 @@
                 <option value="45.551564,-73.613033">Villeray–Saint-Michel–Parc-Extension</option>
                 <option>My Location</option>
             </select>
-            <input style="width: 100px" type="button" onclick='search()'  value='search'/>
+            <input style="width: 100px" type="button" id="submit" value='search'/>
 		</div>
 		
 		<div id="map"> MAP!!

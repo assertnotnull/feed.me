@@ -1,8 +1,12 @@
 <h1>Restaurants</h1>
+<div id="accordion">
 <ul>
 {#    {{ yellow|default:"not found" }}#}
     {% for business in yellow %}
-    <li>{{ business.name }}</li>
+    <li id="{{ business.name }}"><a href="#">{{ business.name }}</a></li>
+        <div>{% for k,v in business.address.iteritems %}
+            {{ k }} : {{ v }} <br/>
+        {% endfor %}</div>
     {% endfor %}
 
     <script type="text/javascript">
@@ -12,47 +16,42 @@
         {% for business in yellow %}
             { lat : {{ business.geoCode.latitude }},
               lng : {{ business.geoCode.longitude }},
-              data: '<h3>{{ business.name }}</h3><p>' +
-                      {% for k,v in business.address.iteritems %}
-                          ' {{ k }} : {{ v }} <br/>' +
-                      {% endfor %}
-                      '</p>'},
+              data: '{{ business.name }}'},
         {% endfor %}
                 ],
                     marker: {
                         options: {
                             draggable: false
-                        }
-                    },
-                    events:{
-                        mouseover: function(marker, event, data){
-                            var map = $(this).gmap3('get'),
-                                    infowindow = $(this).gmap3({action:'get', name:'infowindow'});
-                            if (infowindow){
-                                infowindow.open(map, marker);
-                                infowindow.setContent(data);
-                            } else {
-                                $(this).gmap3({action:'addinfowindow', anchor:marker, options:{content: data}});
-                            }
                         },
-                        mouseout: function(){
-                            var infowindow = $(this).gmap3({action:'get', name:'infowindow'});
-                            if (infowindow){
-                                infowindow.close();
+                        events:{
+                            click: function(marker, event, data){
+                                //$('#accordion').accordion('option', 'active', "'#"+ data+"'"); if data = pcode
+
+                                var map = $(this).gmap3('get'),
+                                        infowindow = $(this).gmap3({action:'get', name:'infowindow'});
+                                if (infowindow){
+                                    infowindow.open(map, marker);
+                                    infowindow.setContent(data);
+                                } else {
+                                    $(this).gmap3({action:'addinfowindow', anchor:marker, options:{content: data}});
+                                }
                             }
                         }
-                }},"autofit")
+                }},'autofit');
+        $('#accordion').accordion({
+            header: 'li'
+        });
     </script>
 </ul>
+</div>
 <h1>What your friends said</h1>
-<ul>
-    <li>In vitae dui at dui sodales condimentum</li>
-    <li>Integer imperdiet mauris nec risus aliquet vitae bibendum massa commodo.</li>
-    <li>Aenean eget neque eu tellus semper ornare</li>
-</ul>
+<div id="wajam_content">
+</div>
 <h1>What the law said</h1>
+<div id="restonet_content">
 <ul>
     <li>In vitae dui at dui sodales condimentum</li>
     <li>Integer imperdiet mauris nec risus aliquet vitae bibendum massa commodo.</li>
     <li>Aenean eget neque eu tellus semper ornare</li>
 </ul>
+</div>

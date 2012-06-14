@@ -1,0 +1,13 @@
+<ul>
+    {% for result in wajam.results %}
+        <p>
+        Title: {{ result.title }}<br/>
+        Description: {{ result.description }}<br/>
+            Sources:
+            {% for source in result.sources %}
+                {{ source.social_network }}
+            {% endfor %}
+        </p>
+    {% endfor %}
+    Total: {{ wajam.total_found }}
+</ul>

@@ -7,8 +7,8 @@ from yellowapi import YellowAPI
 def index(request):
     return render(request, 'index.html')
 
-def wajam_search(query, *args):
-    query.format(args)
+def wajam_search(query, args):
+    query = query.format(args)
     wajam_json = json.load(urllib2.urlopen(query))
     return wajam_json
 
@@ -22,7 +22,10 @@ def search(request, category, location):
     result = {'yellow' : yellow_search(yellow, category, location)}
     return render(request, 'search.html', result)
 
-def search_wajam(request, resturant_name):
+def search_wajam(request, resturant):
     wajamurl = 'https://api.wajam.com/trial/v1/search?q={0}'
-    result = wajam_search(wajamurl, resturant_name)
-    return render(request, 'wajam.html', result)
+    if resturant is not '':
+        result = {'wajam' : wajam_search(wajamurl, 'games')}
+    else:
+        result = None
+    return render_to_response(request, 'wajam.html', result)

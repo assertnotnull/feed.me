@@ -17,7 +17,6 @@ class SimpleTest(TestCase):
     def test_yellow_api(self):
         yellow = YellowAPI('s73bf2pqaswz5a6secydtsth', test_mode=True, format='JSON')
         result = yellow_search(yellow, self.terme, self.location)
-        print result
         self.assertEqual(result[0].get('name'), 'Restaurant Frites Alors')
 
     def test_wajam_api(self):
