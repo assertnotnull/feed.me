@@ -28,4 +28,4 @@ def search_wajam(request, resturant):
         result = {'wajam' : wajam_search(wajamurl, 'games')}
     else:
         result = None
-    return render_to_response(request, 'wajam.html', result)
+    return render(request, 'wajam.html', result)
