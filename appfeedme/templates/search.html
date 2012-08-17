@@ -1,14 +1,21 @@
 <h1>Restaurants</h1>
-<div id="accordion">
-<ul>
+<div id="carousel" class="carousel slide">
 {#    {{ yellow|default:"not found" }}#}
+    <div class="carousel-inner">
     {% for business in yellow %}
-    <li id="{{ business.address.pcode }}"><a href="#">{{ business.name }}</a></li>
-        <div>{% for k,v in business.address.iteritems %}
-            {{ k }} : {{ v }} <br/>
-        {% endfor %}</div>
+        <div class="item">
+        <div id="{{ business.address.pcode }}"><a href="#">{{ business.name }}</a></div>
+        <div>
+            {% for k,v in business.address.iteritems %}
+                {{ k }} : {{ v }} <br/>
+             {% endfor %}
+        </div>
+        </div>
     {% endfor %}
 
+    </div>
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     <script type="text/javascript">
         $('#map').gmap3(
                 {action: 'addMarkers',
@@ -38,29 +45,8 @@
                             }
                         }
                 }},'autofit');
-        $('#accordion').accordion({
-            header: 'li',
-            change: function (event, ui) {
-                $.getJSON('search-wajam/' + ui.newHeader.attr('id'), function(data) {
-                    $(document).ready(function(){
-                        $("#wajam_content").agile_carousel({
-                            carousel_data: data,
-                            carousel_outer_height: 228,
-                            carousel_height: 228,
-                            slide_height: 230,
-                            carousel_outer_width: 480,
-                            slide_width: 480,
-                            transition_time: 300,
-                            timer: 4000,
-                            continuous_scrolling: true,
-                            control_set_1: "numbered_buttons",
-                            no_control_set: "hover_previous_button,hover_next_button"
-                        });
-                    });
-                });
-        });
+        $('#carousel').carousel();
     </script>
-</ul>
 </div>
 <h1>What your friends said</h1>
 <div id="wajam_content">

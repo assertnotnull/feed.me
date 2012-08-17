@@ -4,10 +4,10 @@
 
 @font-face {
     font-family: 'AardvarkCafeRegular';
-    src: url('fonts/aardc___-webfont.eot');
-    src: url('fonts/aardc___-webfont.eot') format('embedded-opentype'),
-         url('fonts/aardc___-webfont.woff') format('woff'),
-         url('fonts/aardc___-webfont.ttf') format('truetype'),
+    src: url('../fonts/aardc___-webfont.eot');
+    src: url('../fonts/aardc___-webfont.eot') format('embedded-opentype'),
+         url('../fonts/aardc___-webfont.woff') format('woff'),
+         url('../fonts/aardc___-webfont.ttf') format('truetype'),
          url('aardc___-webfont.svg#AardvarkCafeRegular') format('svg');
     font-weight: normal;
     font-style: normal;
@@ -68,4 +68,8 @@ h1 {
     font-style: normal;
 	color:#000;
 	font-size:14pt;
+}
+
+body .container {
+    padding-top: 60px;
 }

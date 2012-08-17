@@ -5,16 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'socalcore.views.index', name='index'),
-    url(r'^search/(?P<category>.*)/(?P<location>.*)', 'socalcore.views.search', name='search'),
-    url(r'^search-wajam/(?P<resturant>.*)$', 'socalcore.views.search_wajam', name='search_wajam'),
-    # Examples:
-    # url(r'^$', 'socal.views.home', name='home'),
-    # url(r'^socal/', include('socal.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'appfeedme.views.index', name='index'),
+    url(r'^search/(?P<category>.*)/(?P<location>.*)', 'appfeedme.views.search', name='search'),
+    url(r'^search-wajam/(?P<resturant>.*)$', 'appfeedme.views.search_wajam', name='search_wajam'),
 )
