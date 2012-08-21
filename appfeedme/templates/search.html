@@ -4,7 +4,7 @@
     <div class="carousel-inner">
     {% for business in yellow %}
         <div class="item">
-        <div id="{{ business.address.pcode }}"><a href="#">{{ business.name }}</a></div>
+        <div id="{{ business.address.pcode }}"><a class="restaurant_name" href="#">{{ business.name }}</a></div>
         <div>
             {% for k,v in business.address.iteritems %}
                 {{ k }} : {{ v }} <br/>

@@ -179,14 +179,9 @@ LOGGING = {
             'propagate': True,
             },
         },
-    'apps.essence.views': {
+    'appfeedme.views': {
         'handlers': ['console', 'logfile'],
         'level': 'DEBUG',
         'propagate': True,
         },
-    'apps.essence.signals': {
-        'handlers': ['console', 'logfile'],
-        'level': 'DEBUG',
-        'propagate': True,
-        }
 }
